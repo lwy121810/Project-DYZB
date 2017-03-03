@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewNormalCell" customModule="Project_DYZB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="231" height="169"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="231" height="169"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_live_cate_normal" translatesAutoresizingMaskIntoConstraints="NO" id="ENA-FS-x14">
+                        <rect key="frame" x="0.0" y="145" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="JlS-M4-0Xu"/>
+                            <constraint firstAttribute="width" constant="14" id="n7K-oK-K5Y"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2UV-g0-3nH">
+                        <rect key="frame" x="19" y="144" width="207" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Img_default" translatesAutoresizingMaskIntoConstraints="NO" id="Wed-xX-wJQ">
+                        <rect key="frame" x="0.0" y="0.0" width="231" height="139"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nf9-mm-Qi9">
+                        <rect key="frame" x="5" y="119" width="25" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lqx-cf-YAO">
+                        <rect key="frame" x="162" y="118" width="64" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="666在线" image="Image_online"/>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="2UV-g0-3nH" firstAttribute="leading" secondItem="ENA-FS-x14" secondAttribute="trailing" constant="5" id="0tm-ea-9yL"/>
+                <constraint firstAttribute="trailing" secondItem="Wed-xX-wJQ" secondAttribute="trailing" id="2JT-47-XRU"/>
+                <constraint firstItem="Wed-xX-wJQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="C9q-7u-wZy"/>
+                <constraint firstItem="Lqx-cf-YAO" firstAttribute="bottom" secondItem="Wed-xX-wJQ" secondAttribute="bottom" constant="-5" id="Cg2-YC-UGG"/>
+                <constraint firstAttribute="trailing" secondItem="2UV-g0-3nH" secondAttribute="trailing" constant="5" id="MVD-Jf-Srl"/>
+                <constraint firstItem="nf9-mm-Qi9" firstAttribute="bottom" secondItem="Wed-xX-wJQ" secondAttribute="bottom" constant="-5" id="TdH-t8-UzL"/>
+                <constraint firstItem="2UV-g0-3nH" firstAttribute="top" secondItem="Wed-xX-wJQ" secondAttribute="bottom" constant="5" id="Tsq-PP-WKf"/>
+                <constraint firstItem="nf9-mm-Qi9" firstAttribute="leading" secondItem="Wed-xX-wJQ" secondAttribute="leading" constant="5" id="W9G-rG-00r"/>
+                <constraint firstItem="2UV-g0-3nH" firstAttribute="centerY" secondItem="ENA-FS-x14" secondAttribute="centerY" id="kwh-AF-nJU"/>
+                <constraint firstAttribute="bottom" secondItem="ENA-FS-x14" secondAttribute="bottom" constant="10" id="moz-CY-74R"/>
+                <constraint firstItem="ENA-FS-x14" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nDb-bV-N9I"/>
+                <constraint firstItem="Wed-xX-wJQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uOM-Lg-SDW"/>
+                <constraint firstItem="Lqx-cf-YAO" firstAttribute="trailing" secondItem="Wed-xX-wJQ" secondAttribute="trailing" constant="-5" id="zF8-L7-pv7"/>
+            </constraints>
+            <size key="customSize" width="231" height="169"/>
+            <point key="canvasLocation" x="-38.5" y="-48.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Image_online" width="16" height="16"/>
+        <image name="Img_default" width="172" height="103"/>
+        <image name="home_live_cate_normal" width="14" height="14"/>
+    </resources>
+</document>
