@@ -20,6 +20,7 @@ let kNormalItemW = (kScreenW - 3 * kItemMargin) / 2
 let kNormalItemH = kNormalItemW * 3 / 4
 let kPrettyItemH = kNormalItemW * 4 / 3
 
+private let kCycleViewH = kScreenW * 3 / 8
 
 /// 推荐页面
 class RecommendViewController: UIViewController {
@@ -56,11 +57,19 @@ class RecommendViewController: UIViewController {
         return collectionView
     }()
     
+    // 懒加载cycleview
+    fileprivate lazy var cycleView : WYCycleView = {
+        
+        let cycleView = WYCycleView.wyCycleView()
+        cycleView.frame = CGRect(x: 0, y: -kCycleViewH, width: kScreenW, height: kCycleViewH)
+        return cycleView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // 设置UI
         setupUI()
-        
+        // 请求数据
         loadData()
     }
 
@@ -71,46 +80,69 @@ extension RecommendViewController {
         //1.添加collectionView
         view.addSubview(collectionView)
         
+        //2.将cycleView添加到collectionView中
+        collectionView.addSubview(cycleView)
+        
+        //3.设置collectionView的内边距 设置内边距的目的是让cycleView显示出来 不然cycleView需要拉伸才能显示
+        collectionView.contentInset = UIEdgeInsets(top: kCycleViewH, left: 0, bottom: 0, right: 0)
     }
 }
 // MARK:- 请求数据
 extension RecommendViewController {
     fileprivate func loadData() {
+        // 请求推荐数据
+        recommendVM.requestData {
+            self.collectionView.reloadData()
+        }
         
-        recommendVM.requestData()
-//        WYNetworkTool.requestData(type: .POST, urlString: "https://httpbin.org/post", parameters: ["name":""]) { (result) in
-////            print("result ------  \(result)")
-//            WYLog("\(result)")
-//        }
+        // 请求无限轮播数据
+        recommendVM.requestCycleData { 
+            self.cycleView.cycleModels = self.recommendVM.cycleModels
+        }
+        
     }
 }
 
 // MARK:- UICollectionViewDataSource
 extension RecommendViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 8
-        }
-        return 4
+        let group = recommendVM.anchorGroups[section]
+        return group.anchors.count
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 12
+        return recommendVM.anchorGroups.count
     }
+    // MARK:- 取出Cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell : UICollectionViewCell
+        // 1.取出模型
+        let anchorGroup = recommendVM.anchorGroups[indexPath.section]
+        let anchorModel = anchorGroup.anchors[indexPath.item]
         
+        // 2.定义cell
+        var cell : CollectionBaseCell!
+        
+        
+        // 3.取出cell
         if indexPath.section == 1 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kPrettyCellID, for: indexPath) as! CollectionViewPrettyCell
+            
+            
         } else {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath) as! CollectionViewNormalCell
         }
         
+        cell.anchor = anchorModel
         return cell
+        
     }
-    
+    // MARK:- 组头
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath)
+        // 1.取出headerView
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath) as! CollectionHeaderView
+        
+        // 2.给headerView赋值
+        headerView.group = recommendVM.anchorGroups[indexPath.section]
         
         return headerView
     }

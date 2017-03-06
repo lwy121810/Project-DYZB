@@ -3,4 +3,5 @@ use_frameworks!
 
 target 'Project-DYZB' do
     pod 'Alamofire'
+    pod 'Kingfisher'
 end

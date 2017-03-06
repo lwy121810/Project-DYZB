@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="221" height="219"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CP-Sa-OVT">
-                        <rect key="frame" x="0.0" y="195" width="49" height="14"/>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CP-Sa-OVT">
+                        <rect key="frame" x="0.0" y="195" width="121" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="fct-dk-EGg"/>
                         </constraints>
@@ -45,23 +45,24 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="666在线" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p39-lR-Dor">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dut-Rk-W0R">
                         <rect key="frame" x="156" y="5" width="60" height="20"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.32338362068965515" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.40630387931034484" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="eIr-1t-ACe"/>
-                            <constraint firstAttribute="width" constant="60" id="ofF-3c-mSa"/>
+                            <constraint firstAttribute="height" constant="20" id="KUJ-yz-6VR"/>
+                            <constraint firstAttribute="width" constant="60" id="zR6-oL-zww"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="666在线">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="3"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
-                    </label>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -69,15 +70,21 @@
                 <constraint firstItem="Gco-zB-ZrI" firstAttribute="top" secondItem="rl4-JN-eFH" secondAttribute="bottom" constant="5" id="GsF-Fe-EzF"/>
                 <constraint firstItem="rl4-JN-eFH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Voq-Hk-RNd"/>
                 <constraint firstItem="0CP-Sa-OVT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="agf-14-iVL"/>
+                <constraint firstItem="dut-Rk-W0R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="ai6-I0-OvO"/>
                 <constraint firstAttribute="trailing" secondItem="rl4-JN-eFH" secondAttribute="trailing" id="bho-rB-BKZ"/>
-                <constraint firstItem="p39-lR-Dor" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="fPv-yJ-yyh"/>
                 <constraint firstItem="rl4-JN-eFH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hTo-jU-BwZ"/>
-                <constraint firstAttribute="trailing" secondItem="p39-lR-Dor" secondAttribute="trailing" constant="5" id="pW6-nX-0eA"/>
+                <constraint firstAttribute="trailing" secondItem="dut-Rk-W0R" secondAttribute="trailing" constant="5" id="nnK-Mi-KUz"/>
                 <constraint firstItem="Gco-zB-ZrI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qxH-VS-pka"/>
                 <constraint firstAttribute="bottom" secondItem="0CP-Sa-OVT" secondAttribute="bottom" constant="10" id="rhG-LO-zXt"/>
                 <constraint firstItem="0CP-Sa-OVT" firstAttribute="top" secondItem="Gco-zB-ZrI" secondAttribute="bottom" constant="5" id="y9t-LI-14d"/>
             </constraints>
             <size key="customSize" width="221" height="219"/>
+            <connections>
+                <outlet property="cityButton" destination="0CP-Sa-OVT" id="HPl-Tz-fBS"/>
+                <outlet property="iconImageView" destination="rl4-JN-eFH" id="6Jt-Tx-h0Q"/>
+                <outlet property="nickNameLabel" destination="Gco-zB-ZrI" id="gBx-T6-lFA"/>
+                <outlet property="onlineButton" destination="dut-Rk-W0R" id="ZbP-Hv-85S"/>
+            </connections>
             <point key="canvasLocation" x="-20.5" y="8.5"/>
         </collectionViewCell>
     </objects>
