@@ -30,7 +30,16 @@ class HomeViewController: UIViewController {
         let recommendVc = RecommendViewController()
         childVcs.append(recommendVc)
         
-        for _ in 0..<3 {
+        //游戏页面的vc
+        let gameVc = GameViewController()
+        childVcs.append(gameVc)
+        
+        //娱乐页面的vc
+        let amuseViewVc = AmuseViewController()
+        childVcs.append(amuseViewVc)
+        
+        
+        for _ in 0..<1 {
             let vc = UIViewController()
             vc.view.backgroundColor = UIColor.randomColor()
             childVcs.append(vc)

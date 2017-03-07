@@ -8,12 +8,10 @@
 
 import UIKit
 
-class RecommendViewModel {
+class RecommendViewModel : BaseViewModel {
     // MARK:- 懒加载属性
-    lazy var anchorGroups : [AnchorGroupModel] = [AnchorGroupModel]()
-    // MARK:- 懒加载属性
+    /// 轮播图数据源
     lazy var cycleModels : [CycleModel] = [CycleModel]()
-    
     /// 推荐部分的数据
     fileprivate lazy var recommendDataGroup : AnchorGroupModel = AnchorGroupModel()
     /// 颜值部分的数据
@@ -85,21 +83,9 @@ extension RecommendViewModel {
         let otherUrlString = "http://capi.douyucdn.cn/api/v1/getHotCate"
         // 4. 请求2-12部分的数据
         disGroup.enter()//添加进组
-        WYNetworkTool.requestData(type: .GET, urlString: otherUrlString, parameters: parameters) { (result) in
-            // 1.将result转成字典
-            guard let resultDict = result as? [String : NSObject] else { return }
+        
+        loadAnchorData(urlString: otherUrlString, paramters: parameters) { 
             
-            // 2.取出data数据
-            guard let dataArray = resultDict["data"] as? [[String : NSObject]] else { return }
-            
-            // 3.遍历数组 获取字典 并转成模型对象
-            
-            for dict in dataArray {
-                //转成模型
-                let group = AnchorGroupModel(dict: dict)
-                //添加到数组中
-                self.anchorGroups.append(group)
-            }
             disGroup.leave()//离开组
         }
         

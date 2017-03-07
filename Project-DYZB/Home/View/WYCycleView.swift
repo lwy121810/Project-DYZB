@@ -15,6 +15,12 @@ class WYCycleView: UIView {
     @IBOutlet weak var pageControl: UIPageControl!
 
     // MARK:- 定义属性
+    
+    ///定时器
+    fileprivate var timer : Timer?
+    
+    var timeInterVal : Double = 3.0
+    
     var cycleModels : [CycleModel]? {
         didSet {
             //1.刷新collectionView
@@ -22,6 +28,15 @@ class WYCycleView: UIView {
         
             // 2.设置pageControl
             self.pageControl.numberOfPages = cycleModels?.count ?? 0
+            
+            // 3.默认滚到中间的某个位置
+            let indexPath = IndexPath(item: (cycleModels?.count ?? 0) * 10, section: 0)
+            
+            collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+            
+            //4.添加定时器
+            removeTimer()
+            addTimer()
             
         }
     }
@@ -44,7 +59,6 @@ class WYCycleView: UIView {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
         
-        collectionView.isPagingEnabled = true
     }
     
 }
@@ -56,6 +70,7 @@ extension WYCycleView {
         // 注册cell
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
         collectionView.register(UINib(nibName: "WYCycleCell", bundle: nil), forCellWithReuseIdentifier: kCellID)
+        collectionView.isPagingEnabled = true
     }
 }
 
@@ -70,7 +85,7 @@ extension WYCycleView {
 extension WYCycleView : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //可选链返回的是可选类型 所以这里设置一个默认值
-        return self.cycleModels?.count ?? 0
+        return (self.cycleModels?.count ?? 0) * 10000
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,18 +93,53 @@ extension WYCycleView : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellID, for: indexPath) as! WYCycleCell
         
         //2.取出数据模型
-        let model = cycleModels?[indexPath.item]
+        let model = cycleModels![(indexPath as NSIndexPath).item % cycleModels!.count]
         
         cell.cycleModel = model
         
         return cell
-        
-        
     }
     
 }
+// MARK:- 代理
 extension WYCycleView : UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 1.获取偏移量
+        let offset = scrollView.contentOffset.x + scrollView.width * 0.5
+        // 2.设置pageControl的currentIndex
+        pageControl.currentPage = Int(offset / self.collectionView.width) % (cycleModels?.count ?? 1)
         
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        removeTimer()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        addTimer()
+    }
+    
+}
+// MARK:- 定时器的方法
+extension WYCycleView {
+    fileprivate func addTimer() {
+        timer = Timer(timeInterval: timeInterVal, target: self, selector: #selector(scrollToNext), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .commonModes)
+    }
+    
+    @objc fileprivate func scrollToNext () {
+        //1.获取滚动的偏移量
+        let currentOffsetX = collectionView.contentOffset.x
+        
+        let offsetX = currentOffsetX + collectionView.bounds.width
+        
+        //2.滚动到该位置
+        let point  = CGPoint(x: offsetX, y: 0)
+        collectionView.setContentOffset(point, animated: true)
+    }
+    fileprivate func removeTimer(){
+        timer?.invalidate()//从运行循环中移除
+        timer = nil
+    }
+    
 }
